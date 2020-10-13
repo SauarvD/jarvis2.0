@@ -12,11 +12,15 @@ const configData = require("../utils");
  * @description Helper Function to talk to google API to get authentication token
  */
 const getToken = async () => {
+    let email = process.env.client_email
+    let key = process.env.private_key
+    console.log(email);
+    console.log(key);
     return new Promise(resolve => {
         googleAuth.authenticate(
           {
-            email: process.env.client_email,
-            key: process.env.private_key,
+            email: email,
+            key: key,
             scopes: [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/dialogflow"

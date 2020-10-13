@@ -12,6 +12,7 @@ const configData = require("../utils");
  * @description Helper Function to talk to google API to get authentication token
  */
 const getToken = async () => {
+    console.log(process.env)
     return new Promise(resolve => {
         googleAuth.authenticate(
           {

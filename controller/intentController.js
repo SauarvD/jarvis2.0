@@ -12,7 +12,7 @@ const getWeatherData = async query => {
       `https://api.weatherapi.com/v1/current.json?key=d64b4096e02d47bcacb111415201410&q=${query.parameters.any}`
     )
     .then(response => {
-      console.log(response);
+      return query.parameters.any + 'seems to be' + response.data.current.condition.text;
     })
     .catch(error => {
       console.log(error);

@@ -12,6 +12,7 @@
  */
 const handleIntent = async (req, res) => {
     try {
+        console.log('req from client ', req);
         res.status(200).send({
             "fulfillmentMessages": [
                 {

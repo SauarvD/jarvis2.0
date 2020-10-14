@@ -14,8 +14,8 @@ const handleIntent = async (req, res) => {
     try {
         console.log(req);
         res.status(200).send({
-            success: true,
-            response: 'hello world',
+            speech: 'weather is fine',
+            displayText: 'weather is fine',
         });
     } catch(ex) {
         res.status(500).send({

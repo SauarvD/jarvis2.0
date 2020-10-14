@@ -12,15 +12,16 @@
  */
 const handleIntent = async (req, res) => {
     try {
-        console.log(req);
         res.status(200).send({
             speech: 'weather is fine',
             displayText: 'weather is fine',
+            source: 'weather-action'
         });
     } catch(ex) {
         res.status(500).send({
-            success: false,
-            response: ex.message || 'Token authentication Failed'
+            speech: 'Something went wrong it seems',
+            displayText: 'Something went wrong it seems',
+            source: 'weather-action'
         })
     }
 }

@@ -15,7 +15,7 @@ const getWeatherData = query => {
       .then(response => {
         resolve(
           query.parameters.any +
-            "seems to be" +
+            " seems to have " +
             response.data.current.condition.text
         );
       })

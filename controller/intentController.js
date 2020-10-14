@@ -6,17 +6,23 @@
 
 const axios = require("axios");
 
-const getWeatherData = async query => {
-  await axios
-    .get(
-      `https://api.weatherapi.com/v1/current.json?key=d64b4096e02d47bcacb111415201410&q=${query.parameters.any}`
-    )
-    .then(response => {
-      return query.parameters.any + 'seems to be' + response.data.current.condition.text;
-    })
-    .catch(error => {
-      console.log(error);
-    });
+const getWeatherData = query => {
+  return new Promise(async (resolve, reject) => {
+    await axios
+      .get(
+        `https://api.weatherapi.com/v1/current.json?key=d64b4096e02d47bcacb111415201410&q=${query.parameters.any}`
+      )
+      .then(response => {
+        resolve(
+          query.parameters.any +
+            "seems to be" +
+            response.data.current.condition.text
+        );
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
 };
 
 /**
@@ -31,28 +37,28 @@ const handleIntent = async (req, res) => {
     switch (req.body.queryResult.action) {
       case "location":
         response = await getWeatherData(req.body.queryResult);
-        console.log('*********** ' + response);
+        console.log("*********** " + response);
         res.status(200).send({
-            fulfillmentMessages: [
-                {
-                text: {
-                    text: [response]
-                }
-                }
-            ]
+          fulfillmentMessages: [
+            {
+              text: {
+                text: [response]
+              }
+            }
+          ]
         });
         break;
       default:
         response = "Something seems to be broken, I need more training";
-        console.log('&&&&&&&&&&& ' + response);
+        console.log("&&&&&&&&&&& " + response);
         res.status(200).send({
-            fulfillmentMessages: [
-              {
-                text: {
-                  text: [response]
-                }
+          fulfillmentMessages: [
+            {
+              text: {
+                text: [response]
               }
-            ]
+            }
+          ]
         });
         break;
     }

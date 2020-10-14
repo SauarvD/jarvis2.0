@@ -13,6 +13,6 @@ const { handleIntent } = require("../controller/intentController");
 /**
  * Endpoints used to handle all token operations
  */
-router.get("/intent", handleIntent);
+router.post("/intent", handleIntent);
 
 module.exports = router;

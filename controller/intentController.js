@@ -31,6 +31,7 @@ const handleIntent = async (req, res) => {
     switch (req.body.queryResult.action) {
       case "location":
         response = await getWeatherData(req.body.queryResult);
+        console.log('*********** ' + response);
         res.status(200).send({
             fulfillmentMessages: [
                 {
@@ -43,6 +44,7 @@ const handleIntent = async (req, res) => {
         break;
       default:
         response = "Something seems to be broken, I need more training";
+        console.log('&&&&&&&&&&& ' + response);
         res.status(200).send({
             fulfillmentMessages: [
               {

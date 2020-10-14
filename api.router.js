@@ -12,10 +12,12 @@ const router = express.Router();
  */
 
 const tokenRoute = require("./routes/tokenRoute");
+const intentRoute = require("./routes/intentRoute");
 
 /**
  * DEFINE ALL ROUTES HERE
  */
 router.use("/token", tokenRoute);
+router.use("/handleIntent", intentRoute);
 
 module.exports = router;

@@ -13,15 +13,27 @@
 const handleIntent = async (req, res) => {
     try {
         res.status(200).send({
-            speech: 'weather is fine',
-            displayText: 'weather is fine',
-            source: 'weather-action'
+            "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": [
+                      "Text response from webhook"
+                    ]
+                  }
+                }
+            ]
         });
     } catch(ex) {
         res.status(500).send({
-            speech: 'Something went wrong it seems',
-            displayText: 'Something went wrong it seems',
-            source: 'weather-action'
+            "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": [
+                      "Text response from webhook"
+                    ]
+                  }
+                }
+            ]
         })
     }
 }

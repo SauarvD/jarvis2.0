@@ -63,7 +63,9 @@ const handleIntent = async (req, res) => {
        * Handling all google searches here
        */
       case "google":
-        response = `https://www.google.com/search?q=${req.body.queryResult.parameters.google}`;
+        let queryResult = req.body.queryResult.parameters.google;
+        queryResult = queryResult.split(' ').join('+')
+        response = `https://www.google.com/search?q=${queryResult}`;
         console.log("&&&&&&&&&&& " + response);
         res.status(200).send({
           fulfillmentMessages: [

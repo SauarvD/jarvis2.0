@@ -18,10 +18,7 @@ const getWeatherData = query => {
         `https://api.weatherapi.com/v1/current.json?key=d64b4096e02d47bcacb111415201410&q=${query.parameters.any}`
       )
       .then(response => {
-        resolve({
-          place: query.parameters.any,
-          data: response.data.current
-        });
+        resolve(`${query.parameters.any}:${response.data.current.temp_c}:${response.data.current.condition.text}:${response.data.current.condition.icon}`)
       })
       .catch(error => {
         reject(error);

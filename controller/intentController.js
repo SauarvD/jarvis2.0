@@ -18,11 +18,10 @@ const getWeatherData = query => {
         `https://api.weatherapi.com/v1/current.json?key=d64b4096e02d47bcacb111415201410&q=${query.parameters.any}`
       )
       .then(response => {
-        resolve(
-          query.parameters.any +
-            " seems to have " +
-            response.data.current.condition.text
-        );
+        resolve({
+          place: query.parameters.any,
+          data: response.data.current
+        });
       })
       .catch(error => {
         reject(error);

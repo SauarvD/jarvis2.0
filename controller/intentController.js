@@ -48,7 +48,7 @@ const handleIntent = async (req, res) => {
        */
       case "location":
         response = await getWeatherData(req.body.queryResult);
-        console.log("*********** " + response);
+        console.log("location response " + response);
         res.status(200).send({
           fulfillmentMessages: [
             {
@@ -64,9 +64,24 @@ const handleIntent = async (req, res) => {
        */
       case "google":
         let queryResult = req.body.queryResult.parameters.google;
-        queryResult = queryResult.split(' ').join('+')
+        queryResult = queryResult.split(" ").join("+");
         response = `https://www.google.com/search?q=${queryResult}`;
-        console.log("&&&&&&&&&&& " + response);
+        console.log("google response " + response);
+        res.status(200).send({
+          fulfillmentMessages: [
+            {
+              text: {
+                text: [response]
+              }
+            }
+          ]
+        });
+        break;
+      case "maplocation":
+        let queryResult = req.body.queryResult.parameters.maplocation;
+        queryResult = queryResult.split(" ").join("+");
+        response = `https://www.google.co.in/maps/place/${queryResult}`;
+        console.log("map response " + response);
         res.status(200).send({
           fulfillmentMessages: [
             {

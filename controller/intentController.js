@@ -6,6 +6,11 @@
 
 const axios = require("axios");
 
+/**
+ * @function getWeatherData
+ * @description Function to call weather api to get weather status of a particular location
+ * @param {object} query query from the client
+ */
 const getWeatherData = query => {
   return new Promise(async (resolve, reject) => {
     await axios
@@ -33,8 +38,14 @@ const getWeatherData = query => {
  */
 const handleIntent = async (req, res) => {
   try {
-    let response = "response seems to take long time";
+    let response = "response seems to be taking long time";
+    /**
+     * Handling different actions from the client
+     */
     switch (req.body.queryResult.action) {
+      /**
+       * Handling all weather locations here
+       */
       case "location":
         response = await getWeatherData(req.body.queryResult);
         console.log("*********** " + response);
@@ -48,14 +59,33 @@ const handleIntent = async (req, res) => {
           ]
         });
         break;
-      default:
-        response = "Something seems to be broken, I need more training";
+      /**
+       * Handling all google searches here
+       */
+      case "google":
+        response = `https://www.google.com/search?q=${req.body.queryResult.parameters.google}`;
         console.log("&&&&&&&&&&& " + response);
         res.status(200).send({
           fulfillmentMessages: [
             {
               text: {
                 text: [response]
+              }
+            }
+          ]
+        });
+        break;
+      /**
+       * Handling default responses here
+       */
+      default:
+        res.status(200).send({
+          fulfillmentMessages: [
+            {
+              text: {
+                text: [
+                  "I am not sure about that, do you want me to google that?"
+                ]
               }
             }
           ]

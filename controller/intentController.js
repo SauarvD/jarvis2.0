@@ -78,9 +78,9 @@ const handleIntent = async (req, res) => {
         });
         break;
       case "maplocation":
-        let queryResult = req.body.queryResult.parameters.maplocation;
-        queryResult = queryResult.split(" ").join("+");
-        response = `https://www.google.co.in/maps/place/${queryResult}`;
+        let locationQueryResult = req.body.queryResult.parameters.maplocation;
+        locationQueryResult = locationQueryResult.split(" ").join("+");
+        response = `https://www.google.co.in/maps/place/${locationQueryResult}`;
         console.log("map response " + response);
         res.status(200).send({
           fulfillmentMessages: [
